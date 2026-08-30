@@ -121,4 +121,4 @@ supabase_schema.sql     # Database schema
 
 ## Team
 
-Built by team **ATHAR** for the Smart University Hackathon.
+Built by **Renad Mudathir**, developer for team ATHAR at the Smart University Hackathon.
