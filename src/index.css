@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+  background: #282828;
+  overflow: hidden;
+  user-select: none;
+  margin: 0;
+}
+
+/*
+  `user-select: none` above stops the UI feeling like a web page, but it also
+  prevents the caret from being placed inside form fields — which made typing
+  impossible in some browsers. Text inputs must opt back in.
+*/
+input,
+textarea,
+select,
+[contenteditable] {
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
+}
+
+/* Arabic text — IBM Plex Sans Arabic for clean, technical legibility */
+:lang(ar),
+[dir="rtl"],
+.ar {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(35,127,82,0.4); border-radius: 2px; }
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(35,127,82,0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(35,127,82,0); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(165,32,25,0.6), 0 0 12px rgba(165,32,25,0.3); }
+  50% { box-shadow: 0 0 0 10px rgba(165,32,25,0), 0 0 28px rgba(165,32,25,0.5); }
+}
+
+/* Glowing pulse ring for OFFLINE status pill */
+@keyframes offline-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(35,127,82,0.6), 0 0 8px rgba(35,127,82,0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(35,127,82,0), 0 0 18px rgba(35,127,82,0.5);
+  }
+}
+
+/* Red flash pulse for LIVE badge */
+@keyframes live-flash {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(165,32,25,0.7), 0 0 6px rgba(165,32,25,0.4);
+    border-color: rgba(165,32,25,1);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(165,32,25,0), 0 0 20px rgba(165,32,25,0.6);
+    border-color: rgba(165,32,25,0.5);
+  }
+}
+
+/* Tactical scanline sweep for camera feed */
+@keyframes scanline-sweep {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes scan-line {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+/* Screen enter animation — ease-out 300ms for smart-animate feel */
+@keyframes screen-enter {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(18px, -24px) scale(1.06); }
+  66% { transform: translate(-12px, 16px) scale(0.96); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-20px, 14px) scale(1.08); }
+  70% { transform: translate(10px, -18px) scale(0.94); }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(14px, 20px) scale(1.05); }
+}
+
+@keyframes shimmer-ring {
+  0%, 100% { opacity: 0.18; transform: scale(1); }
+  50% { opacity: 0.32; transform: scale(1.04); }
+}
+
+.pulse-green { animation: pulse-green 2s ease-in-out infinite; }
+.pulse-red   { animation: pulse-red 1.4s ease-in-out infinite; }
+.blink { animation: blink 1.2s ease-in-out infinite; }
+.fade-in { animation: fade-in 0.5s ease forwards; }
+.slide-up { animation: slide-up 0.4s ease forwards; }
+.screen-enter { animation: screen-enter 0.3s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
+
+/* Glassmorphic card utility */
+.glass-card {
+  background: rgba(30,30,30,0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+.glass-card-blue {
+  background: rgba(30,30,30,0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(0,83,135,0.20);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+.offline-glow { animation: offline-glow 2s ease-in-out infinite; }
+.live-flash   { animation: live-flash 1s ease-in-out infinite; }
+
+.scanline-tactical {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(35,127,82,0.8) 30%, rgba(35,127,82,0.8) 70%, transparent 100%);
+  box-shadow: 0 0 8px rgba(35,127,82,0.6), 0 0 2px rgba(35,127,82,1);
+  animation: scanline-sweep 2.4s linear infinite;
+  pointer-events: none;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   The new screens size themselves with clamp() and auto-fit grids, so they
+   already adapt. These rules only handle what CSS cannot infer: releasing the
+   page-height lock on touch devices, and keeping the app usable one-handed.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+html, body, #root {
+  min-height: 100%;
+}
+
+@media (max-width: 1024px), (pointer: coarse) {
+  /* The desktop shell locks height and hides overflow; a phone needs to scroll. */
+  html, body, #root {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  #root { width: 100%; }
+}
+
+@media (max-width: 720px) {
+  /* Comfortable tap targets — 44px is the accepted minimum. */
+  button, select, input, textarea, label[role="button"] {
+    min-height: 42px;
+  }
+  /* iOS zooms the page when a field's font is under 16px. */
+  input, select, textarea { font-size: 16px !important; }
+
+  nav { padding: 0 8px !important; }
+  nav button { font-size: 11.5px !important; padding: 7px 10px !important; }
+
+  /* The printable report is a fixed A4 sheet — let it scroll rather than
+     squeeze, so the text stays legible on a narrow screen. */
+  #athar-session-report, #athar-printable-report, #athar-badge-sheet {
+    transform: scale(0.46);
+    transform-origin: top right;
+    margin-bottom: -54%;
+  }
+}
+
+@media (max-width: 460px) {
+  #athar-session-report, #athar-printable-report, #athar-badge-sheet {
+    transform: scale(0.38);
+    margin-bottom: -62%;
+  }
+}
+
+@media print {
+  nav, .no-print { display: none !important; }
+  #athar-session-report { transform: none !important; }
+}

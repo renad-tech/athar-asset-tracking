@@ -1,0 +1,10 @@
+{
+  "description": "This AI-powered offline security tablet app streamlines incident reporting and monitoring with intuitive swipe gestures, enhancing user efficiency and safety.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
